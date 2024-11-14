@@ -39,7 +39,7 @@ SS_Core = {
         elseif Framework == 'QB' then
             QBCore.Functions.SpawnVehicle(model, cb, coords, networked)
         end
-        SS_Log("debug","^4SpawnVehicle "..tostring(model), resourceName, true, currentLine.."42")
+        SS_Log("debug","^4SpawnVehicle "..tostring(model), resourceName, currentLine.."42")
 	end,
 
     DeleteVehicle = function(vehicle)
@@ -48,17 +48,17 @@ SS_Core = {
         elseif Framework == 'QB' then
             QBCore.Functions.DeleteVehicle(vehicle)
         end
-        SS_Log("debug","^4DeleteVehicle "..tostring(vehicle), resourceName, true, currentLine.."42")
+        SS_Log("debug","^4DeleteVehicle "..tostring(vehicle), resourceName, currentLine.."51")
     end,
 
     TriggerCallback = function(name, cb, ...)
-        SS_Log("debug","^4TriggerCallback ^0[^3"..name.."^0]", resourceName, true, currentLine.."53")
+        SS_Log("debug","^4TriggerCallback ^0[^3"..name.."^0]", resourceName, currentLine.."55")
         if Framework == 'ESX' then
             ESX.TriggerServerCallback(name, cb, ...)
         elseif Framework == 'QB' then
             QBCore.Functions.TriggerCallback(name, cb, ...)
         end
-        SS_Log("debug","^4TriggerCallback Finished ^0[^3"..name.."^0]", resourceName, true, currentLine.."59")
+        SS_Log("debug","^4TriggerCallback Finished ^0[^3"..name.."^0]", resourceName, currentLine.."61")
     end,
 
     SetPlayerJob = function()
@@ -82,7 +82,7 @@ SS_Core = {
             --table.isPolice = Config.PoliceJobs[SS_Core.PlayerData.job.name] or false
         end
         --TriggerEvent('ss-bridge:onJobUpdate', SS_Core.PlayerJob)
-        SS_Log("debug","^4Your Job: [^0"..table.label.."^4] Title: [^0"..table.name.."^4] Duty: [^0"..tostring(table.onDuty).."^4] Grade: [^0"..table.grade.."^4]^0", resourceName, true, currentLine.."83")
+        SS_Log("debug","^4Your Job: [^0"..table.label.."^4] Title: [^0"..table.name.."^4] Duty: [^0"..tostring(table.onDuty).."^4] Grade: [^0"..table.grade.."^4]^0", resourceName, currentLine.."85")
         SS_Core.PlayerJob = table
     end,
 

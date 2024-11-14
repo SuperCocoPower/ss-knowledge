@@ -34,8 +34,8 @@ Config = {
     },
 
 	Debug = {
-        enable = false, -- To enable standard debug prints set to true.
-        idType = false, -- For ID debug prints (getting source or identifier etc) if true will increase cpu usage a little more
+        enable = true, -- To enable standard debug prints set to true.
+        idType = false, -- For ID debug prints (getting source or identifier etc). This requires Debug.enable to be set to true.
     },
 
     DefaultLevels = { -- Level system to check xp amount modify to change xp per level.
@@ -62,7 +62,7 @@ Config = {
         sort = 'alphabetically', -- 'alphabetically' makes the list alphabetical. If you want it sorted by total xp then 'xp'
         defaulticon = 'fas fa-book', -- Default icon when no icon is used in a branch.
         ox = { -- Only affects ox_lib users.
-            type = 'menu', -- choose 'context' or 'menu' for different styling of ox options
+            type = 'context', -- choose 'context' or 'menu' for different styling of ox options
             colour = 'cyan', -- This is for the colour of the progress bar
             position = 'bottom-right', -- This is for the position of the generated list using 'context' type 'top-center','bottom-center','top-left','bottom-left','top-right','bottom-right'
             branchxpinfo = true, -- If type is 'menu' and branchxpinfo is true you will get more data shown above the menu.

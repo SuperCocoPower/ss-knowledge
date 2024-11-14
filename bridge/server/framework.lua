@@ -26,7 +26,7 @@ SS_Core = {
     end,
 
     RegisterCallback = function(name, cb)
-        SS_Log("debug", "^4RegisterCallback ^0[^3"..name.."^0]", resourceName, false, currentLine.."27")
+        SS_Log("debug", "^4RegisterCallback ^0[^3"..name.."^0]", resourceName, currentLine.."29")
         if Framework == 'ESX' then
             ESX.RegisterServerCallback(name, cb)
         elseif Framework == 'QB' then
@@ -43,7 +43,7 @@ SS_Core.Player = {
             Wait(500)
             xPlayer = SS_Core.Player.GetFromId(tonumber(src))
         end
-        SS_Log("id_debug", "^4Server Side - GetSource ^0[^3"..tonumber(src).."^0]", resourceName, false, currentLine.."44")
+        SS_Log("id_debug", "^4Server Side - GetSource ^0[^3"..tonumber(src).."^0]", resourceName, currentLine.."46")
         if Framework == 'ESX' then
             return xPlayer.source
         elseif Framework == 'QB' then
@@ -52,7 +52,7 @@ SS_Core.Player = {
     end,
 
     GetFromId = function(src)
-        SS_Log("id_debug", "^4Server Side - GetFromId ^0[^3"..(src).."^0]", resourceName, false, currentLine.."55")
+        SS_Log("id_debug", "^4Server Side - GetFromId ^0[^3"..(src).."^0]", resourceName, currentLine.."55")
         if Framework == 'ESX' then
             return ESX.GetPlayerFromId(src)
         elseif Framework == 'QB' then
@@ -61,7 +61,7 @@ SS_Core.Player = {
     end,
 
     GetIdentifier = function(src)
-        SS_Log("id_debug", "^4Server Side - GetIdentifier ^0[^3"..tonumber(src).."^0]", resourceName, false, currentLine.."64")
+        SS_Log("id_debug", "^4Server Side - GetIdentifier ^0[^3"..tonumber(src).."^0]", resourceName, currentLine.."64")
         local Player = SS_Core.Player.GetFromId(tonumber(src))
         if Player == nil then return end
         if Framework == 'ESX' then
@@ -72,7 +72,7 @@ SS_Core.Player = {
     end,
 
     GetCitizenName = function(src)
-        SS_Log("id_debug", "^4Server Side - GetCitizenName ^0[^3"..tonumber(src).."^0]", resourceName, false, currentLine.."74")
+        SS_Log("id_debug", "^4Server Side - GetCitizenName ^0[^3"..tonumber(src).."^0]", resourceName, currentLine.."75")
         local Player = SS_Core.Player.GetFromId(tonumber(src))
         if Framework == 'ESX' then
             return Player.getName()
@@ -82,10 +82,10 @@ SS_Core.Player = {
     end,
     IsAdmin = function(src)
         local permissions = Config.AdminOptions.ranks
-        SS_Log("debug", "^4Admin ranks able to use commands^0: ^3"..json.encode(permissions).."^0", resourceName, false, currentLine.."84")
+        SS_Log("debug", "^4Admin command ranks^0] ^3"..tostring(json.encode(permissions)).."^0", resourceName, currentLine.."85")
         for k,v in pairs(permissions) do
             if IsPlayerAceAllowed(src, v) then
-                SS_Log("debug", "^4Admin Perm Granted ^0[^3"..src.."^0] ^4Level:^0 [^3"..v.."^0]", resourceName, false, currentLine.."87")
+                SS_Log("debug", "^4Command perm granted to ^0[^3"..src.."^0] ^4Perm level^0 [^3"..v.."^0", resourceName, currentLine.."88")
                 return true
             end
         end
@@ -100,7 +100,7 @@ SS_Core.RegisterCallback("ss-knowledge:server:fetchBranches", function(source, c
     else
         branches = FetchDBBranches(otherID)
     end
-    SS_Log("debug", "^4Fetch Branches: ^3"..json.encode(branches, {indent = true}).."^0", resourceName, false, currentLine.."103")
+    SS_Log("debug", "^4Fetch Branches^0] [^3"..json.encode(branches, {indent = true}).."^0", resourceName, currentLine.."103")
     cb(branches)
 end)
 

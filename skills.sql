@@ -1,9 +1,0 @@
-IF EXISTS players THEN
-    ALTER TABLE players
-    ADD COLUMN skills LONGTEXT;
-END IF;
-
-IF EXISTS users THEN
-    ALTER TABLE users
-    ADD COLUMN skills LONGTEXT;
-END IF;

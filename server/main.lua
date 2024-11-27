@@ -32,13 +32,16 @@ SortBranches = function(Player,data)
             str = str:gsub("%s+", "")
             if Config.Branches[str] ~= nil then
                 if Config.Branches[str].enable then
-                    local xp = value or value.Current
+                    local xp = value
+                    if type(xp) == "table" then
+                        xp = tonumber(value.Current)
+                    end
                     SS_Log("debug","^4SortBranch branch^0] [^3"..str.."^0] [^3"..json.encode(xp).."^0", resourceName, currentLine.."36")
                     sortedBranches[str] = xp
                 end
             else
-                SS_Log("debug","^4[SortBranch^0] [^3branch name - "..str.."^0", resourceName, currentLine.."40")
-                SS_Log("warn","Please add this branch to config and restart else the system will remove ".."^0[^1branch name^0]", resourceName, currentLine.."41")
+                SS_Log("debug","^4SortBranch^0] [^3branch name - "..str.."^0", resourceName, currentLine.."40")
+                SS_Log("warn","^4SortBranch^0] [^3Please add this branch to config and restart^0] [^1branch name - "..str.."^0", resourceName, currentLine.."41")
             end
         end
         for branch, _ in pairs(Config.Branches) do
@@ -72,12 +75,6 @@ AddEventHandler('onResourceStart', function(resource)
         SS_Utils.CheckForDBColumn(Config.Triggers[Framework].playerdatabase,"skills")
 	end
 end)
-
-
-RegisterCommand('tester', function(source,args,rawCommand)
-local data, data2 = GetKnowledgeBranchByServer(args[1],args[2])--,args[3]))
-SS_Core.Notification(source, {message = data.." "..tostring(json.encode(data2))})
-end,false)
 
 CheckArgs = function(id,branch,functionName)
     if id == nil or id == 0 then

@@ -26,7 +26,7 @@ SS_Core = {
     end,
 
     RegisterCallback = function(name, cb)
-        SS_Log("debug", "^4RegisterCallback ^0[^3"..name.."^0]", resourceName, currentLine.."29")
+        SS_Log("debug", "^4RegisterCallback ^0[^3"..name.."^0", resourceName, currentLine.."29")
         if Framework == 'ESX' then
             ESX.RegisterServerCallback(name, cb)
         elseif Framework == 'QB' then
@@ -82,7 +82,7 @@ SS_Core.Player = {
     end,
     IsAdmin = function(src)
         local permissions = Config.AdminOptions.ranks
-        SS_Log("debug", "^4Admin command ranks^0] ^3"..tostring(json.encode(permissions)).."^0", resourceName, currentLine.."85")
+        SS_Log("debug", "^4Admin command ranks^0] [^3"..table.concat(permissions, "^0,^3").."^0", resourceName, currentLine.."85")
         for k,v in pairs(permissions) do
             if IsPlayerAceAllowed(src, v) then
                 SS_Log("debug", "^4Command perm granted to ^0[^3"..src.."^0] ^4Perm level^0 [^3"..v.."^0", resourceName, currentLine.."88")
@@ -91,6 +91,7 @@ SS_Core.Player = {
         end
         return false
     end,
+
 }
 
 SS_Core.RegisterCallback("ss-knowledge:server:fetchBranches", function(source, cb, otherID)
@@ -100,7 +101,9 @@ SS_Core.RegisterCallback("ss-knowledge:server:fetchBranches", function(source, c
     else
         branches = FetchDBBranches(otherID)
     end
-    SS_Log("debug", "^4Fetch Branches^0] [^3"..json.encode(branches, {indent = true}).."^0", resourceName, currentLine.."103")
+    if branches ~= nil then
+        SS_Log("debug", "^4Fetch Branches^0] "..SS_Utils.CustomJsonEncode(branches).."^0", resourceName, currentLine.."103")
+    end
     cb(branches)
 end)
 

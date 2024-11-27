@@ -27,6 +27,9 @@ GiveAdminCommands = function()
         end
         SS_Core.TriggerCallback("ss-knowledge:server:fetchBranches", function(data)
             local PlayerBranches = data
+            if type(PlayerBranches[args[2]]) ~= "number" then
+                PlayerBranches[args[2]] = tonumber(PlayerBranches[args[2]].Current) or 0
+            end
             SS_Log("debug","^4Before adding xp: ^3"..PlayerBranches[args[2]], resourceName, currentLine.."30")
             PlayerBranches[args[2]] = PlayerBranches[args[2]] + args[3]
             local Levels = Config.Branches[args[2]].customLevels or Config.DefaultLevels

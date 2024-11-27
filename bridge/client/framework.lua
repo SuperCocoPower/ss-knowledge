@@ -52,13 +52,13 @@ SS_Core = {
     end,
 
     TriggerCallback = function(name, cb, ...)
-        SS_Log("debug","^4TriggerCallback ^0[^3"..name.."^0]", resourceName, currentLine.."55")
+        SS_Log("debug","^4TriggerCallback ^0[^3"..name.."^0", resourceName, currentLine.."55")
         if Framework == 'ESX' then
             ESX.TriggerServerCallback(name, cb, ...)
         elseif Framework == 'QB' then
             QBCore.Functions.TriggerCallback(name, cb, ...)
         end
-        SS_Log("debug","^4TriggerCallback Finished ^0[^3"..name.."^0]", resourceName, currentLine.."61")
+        SS_Log("debug","^4TriggerCallback Finished ^0[^3"..name.."^0", resourceName, currentLine.."61")
     end,
 
     SetPlayerJob = function()

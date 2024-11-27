@@ -20,6 +20,9 @@ CreateKnowledgeBranchList = function()
             local min = branchXP.minxp
             local max = branchXP.maxxp
             local current = CurrentBranches[k] or 0
+            if type(CurrentBranches[k]) ~= "number" then
+                current = tonumber(CurrentBranches[k].Current) or 0
+            end
 
             local range = max - min
             local progress = current - min
@@ -29,9 +32,8 @@ CreateKnowledgeBranchList = function()
             local desc = Lang['knowledge_branch_desc']:format(branchTierTitle,math.ceil(current))
 
             if Config.Menu.type == 'ox' and Config.Menu.ox.type ~= 'context' then
-                if not Config.Menu.ox.branchxpinfo then
-                    desc = ''
-                else
+                desc = ''
+                if Config.Menu.ox.branchxpinfo then
                     desc = Lang['knowledge_branch_desc_total_info']:format(math.ceil(current))
                 end
             end

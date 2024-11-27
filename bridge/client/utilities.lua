@@ -45,7 +45,19 @@ SS_Utils = {
 		elseif Framework == "ESX" then
 			return ESX.PlayerData.identifier
 		end
-	end
+	end,
+
+	CustomJsonTable = function(tbl)
+    local result = "\n"
+    for key, value in pairs(tbl) do
+        if next(tbl, key) == nil then
+            result = result.."[^5"..key.."^0] [^3" .. tostring(value) .. "^0"
+        else
+            result = result.."[^5"..key.."^0] [^3" .. tostring(value) .. "^0]\n"
+        end
+    end
+        return result
+    end,
 }
 
 RegisterNetEvent('ss-knowledge:bridge:utilities:notification', function(msg)

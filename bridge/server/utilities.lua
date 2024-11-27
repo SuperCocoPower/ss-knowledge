@@ -84,4 +84,16 @@ SS_Utils = {
             end
         end)
     end,
+
+    CustomJsonEncode = function(tbl)
+    local result = "\n"
+    for key, value in pairs(tbl) do
+        if next(tbl, key) == nil then
+            result = result.."[^5"..key.."^0] [^3" .. tostring(value) .. "^0"
+        else
+            result = result.."[^5"..key.."^0] [^3" .. tostring(value) .. "^0]\n"
+        end
+    end
+        return result
+    end,
 }

@@ -5,9 +5,12 @@ local currentLine = "CLNT>FUNC #"
 
 GetKnowledgeBranch = function(currentBranch, branch)
     local tier = 0
-    SS_Log("debug","^4Branch:^0 [^3"..branch.. "^0] ^4Current xp:^0 [^3"..currentBranch.."^0]", resourceName, currentLine.."8")
+    if type(currentBranch) ~= "number" then
+        currentBranch = tonumber(currentBranch.Current) or 0
+    end
+    SS_Log("debug","^4Branch^0] [^3"..branch.. "^0] [^4XP^0] [^3"..tostring(currentBranch).."^0", resourceName, currentLine.."8")
     if  Config.Branches[branch] == nil then
-        SS_Log("warn","^1Branch is missing from config's branch list. Missing branch: ^0[^3"..tostring(branch).."^0]", resourceName, currentLine.."10")
+        SS_Log("warn","^1Branch is missing from config's branch list. Missing branch: ^0[^3"..tostring(branch).."^0", resourceName)
     end
     local tiers =  Config.Branches[branch].customLevels or Config.DefaultLevels
     local tierLimits = tiers[1]
@@ -69,7 +72,7 @@ exports('GetCurrentKnowledgeBranch', GetCurrentKnowledgeBranch)
 FetchKnowledgeBranch = function()
     SS_Core.TriggerCallback("ss-knowledge:server:fetchBranches", function(data)
         if data then
-            SS_Log("debug","^4Knowledge Branches^0] ["..json.encode(data, {indent=true}).."^0", resourceName, currentLine.."72")
+            SS_Log("debug","^4Knowledge Branches^0] "..SS_Utils.CustomJsonTable(data).."^0", resourceName, currentLine.."72")
             CurrentBranches = data
         else
             SS_Log("warn",'^1If you were logging out or not fully loaded in city please ignore.\n^1If not branches found on load of FetchKnowledgeBranch.^0', resourceName, currentLine.."75")
